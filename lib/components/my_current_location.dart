@@ -1,37 +1,39 @@
 import 'package:flutter/material.dart';
-// ignore: unused_import
-import 'package:flutter_app/models/restaurant.dart';
 import 'package:provider/provider.dart';
+import '../models/restaurant.dart';
 
 class MyCurrentLocation extends StatelessWidget {
-   MyCurrentLocation({super.key});
+  MyCurrentLocation({super.key});
 
   final textController = TextEditingController();
 
+  // Method to open location search box
   void openLocationSearchBox(BuildContext context) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: Theme.of(context).colorScheme.surface,
-        title: const Text("Your location"),
+        title: const Text("Your Location"),
         content: TextField(
           controller: textController,
+          autofocus: true, // Automatically focus the TextField when the dialog opens
           decoration: const InputDecoration(hintText: "Enter address..."),
         ),
         actions: [
-          // cancel Button
-          MaterialButton(
-            onPressed:(){
-               Navigator.pop(context);
-               textController.clear();
-               },
+          // Cancel button
+          TextButton(
+            onPressed: () {
+              // Clear the text controller and dismiss the dialog
+              Navigator.pop(context);
+              textController.clear();
+            },
             child: const Text('Cancel'),
           ),
 
-          //save Button
-          MaterialButton(
-            onPressed: (){
-              String newAddress =textController.text;
+          // Save button
+          TextButton(
+            onPressed: () {
+              String newAddress = textController.text;
               context.read<Restaurant>().updateDeliveryAddress(newAddress);
               Navigator.pop(context);
               textController.clear();
@@ -50,29 +52,35 @@ class MyCurrentLocation extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // "Deliver Now" label
           Text(
-            "deliver now",
+            "Deliver Now",
             style: TextStyle(color: Theme.of(context).colorScheme.primary),
           ),
+
+          // GestureDetector for address and dropdown menu
           GestureDetector(
             onTap: () => openLocationSearchBox(context),
             child: Row(
               children: [
-                //address
+                // Address Text
                 Consumer<Restaurant>(
-                  builder:(context, restaurant, child) => Text(
-                    restaurant.deliveryAddress,
+                  builder: (context, restaurant, child) => Text(
+                    restaurant.deliveryAddress.isEmpty
+                        ? 'Enter your address'
+                        : restaurant.deliveryAddress,
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.inversePrimary,
                       fontWeight: FontWeight.bold,
                     ),
-                  )
                   ),
-                //drop down menuu
+                ),
+
+                // Dropdown Icon
                 const Icon(Icons.keyboard_arrow_down_rounded),
               ],
             ),
-          )
+          ),
         ],
       ),
     );

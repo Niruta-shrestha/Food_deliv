@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/pages/cart_page.dart';
 
 class MySliverAppBar extends StatelessWidget {
-  final Widget child;
-  final Widget title;
+  final Widget child; // Typically the background content for flexible space
+  final Widget title; // Title widget that is placed in the SliverAppBar
 
   const MySliverAppBar({
     super.key,
@@ -14,38 +14,40 @@ class MySliverAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      
-      expandedHeight: 340,
-      collapsedHeight: 120,
+      expandedHeight: 400,
+      // Height of the app bar when fully expanded
+      collapsedHeight: 100,
+      // Height of the app bar when collapsed
       floating: false,
+      // Does not float when scrolling
       pinned: true,
+      // Keeps the app bar visible when collapsed
       actions: [
-        //cart MyButton
+        // Cart icon button
         IconButton(
           onPressed: () {
-            //go to cart page
+            // Navigate to the cart page when the cart button is pressed
             Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const CartPage(),
-                ));
+              context,
+              MaterialPageRoute(
+                builder: (context) => const CartPage(),
+              ),
+            );
           },
           icon: const Icon(Icons.shopping_cart_outlined),
-        )
+        ),
       ],
-      
       backgroundColor: Theme.of(context).colorScheme.surface,
       foregroundColor: Theme.of(context).colorScheme.inversePrimary,
-      title: const Text("sunset diner"),
+      title: const Text("Sunset Diner"),
       flexibleSpace: FlexibleSpaceBar(
-        background: Padding(
-          padding: const EdgeInsets.only(bottom: 50.0),
-          child: child,
-        ),
+        background: child,
         title: Center(child: title),
         centerTitle: true,
+        // Ensures title is centered
         titlePadding: const EdgeInsets.only(left: 0, right: 0, top: 0),
-        expandedTitleScale: 1,
+        // No padding around the title
+        expandedTitleScale: 1, // Keep title size fixed during expansion
       ),
     );
   }

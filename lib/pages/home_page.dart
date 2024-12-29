@@ -18,16 +18,13 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage>
-    with SingleTickerProviderStateMixin {
-  //tab controller
+class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   @override
   void initState() {
     super.initState();
-    _tabController =
-        TabController(length: FoodCategory.values.length, vsync: this);
+    _tabController = TabController(length: FoodCategory.values.length, vsync: this);
   }
 
   @override
@@ -36,37 +33,32 @@ class _HomePageState extends State<HomePage>
     super.dispose();
   }
 
-//sort out and return list of food belonging to that categories
+  // Helper method to filter foods by category
   List<Food> _filterMenuByCategory(FoodCategory category, List<Food> fullMenu) {
     return fullMenu.where((food) => food.category == category).toList();
   }
 
-  //return list of foods in given category
-  List<Widget> getFoodInThisCategory(List<Food> fullMenu) {
-    return FoodCategory.values.map((category) {
-      //get category menu
-      List<Food> categoryMenu = _filterMenuByCategory(category, fullMenu);
+  // This method builds food items for a given category
+  Widget _buildFoodListForCategory(FoodCategory category, List<Food> fullMenu) {
+    List<Food> categoryMenu = _filterMenuByCategory(category, fullMenu);
 
-      return ListView.builder(
-        itemCount: categoryMenu.length,
-        physics: const NeverScrollableScrollPhysics(),
-        padding: EdgeInsets.zero,
-        itemBuilder: (context, index) {
-          //get individual food
-          final food = categoryMenu[index];
-          //return food tile ui
-          return FoodTile(
-            food: food,
-            onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => FoodPage(food: food),
-              ),
+    return ListView.builder(
+      itemCount: categoryMenu.length,
+      physics: const NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      itemBuilder: (context, index) {
+        final food = categoryMenu[index];
+        return FoodTile(
+          food: food,
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => FoodPage(food: food),
             ),
-          );
-        },
-      );
-    }).toList();
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -77,28 +69,35 @@ class _HomePageState extends State<HomePage>
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           MySliverAppBar(
             title: MyTabBar(tabController: _tabController),
-            child: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
-              Divider(
-                indent: 25,
-                endIndent: 25,
-                color: Theme.of(context).colorScheme.secondary,
-              ),
-
-              //my current location
-
-               MyCurrentLocation(),
-
-              // description
-              const MyDescriptionBox(),
-            ]),
-          )
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                // Current Location Widget
+                const SizedBox(height: 15),
+                 MyCurrentLocation(),
+                const MyDescriptionBox(),
+                const SizedBox(height: 20),
+              ],
+            ),
+          ),
         ],
-        body: Consumer<Restaurant>(
-            builder: (context, restaurant, child) => TabBarView(
-                  controller: _tabController,
-                  children: getFoodInThisCategory(restaurant.menu),
-                )),
+        body: SafeArea(
+          child: Consumer<Restaurant>(
+            builder: (context, restaurant, child) {
+              if (restaurant.menu.isEmpty) {
+                return const Center(child: Text("No food available"));
+              }
+              return TabBarView(
+                controller: _tabController,
+                children: FoodCategory.values.map((category) {
+                  return _buildFoodListForCategory(category, restaurant.menu);
+                }).toList(),
+              );
+            },
+          ),
+        ),
       ),
     );
   }
 }
+
