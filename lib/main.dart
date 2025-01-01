@@ -3,8 +3,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/firebase_options.dart';
 import 'package:flutter_app/models/restaurant.dart';
-import 'package:flutter_app/pages/home_page.dart';
-import 'package:flutter_app/services/auth/auth_gate.dart';
+
+
 import 'package:flutter_app/splash.dart';
 import 'package:flutter_app/themes/theme_provide.dart';
 import 'package:provider/provider.dart';

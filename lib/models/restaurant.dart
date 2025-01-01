@@ -15,7 +15,7 @@ class Restaurant extends ChangeNotifier {
       name: "Classic MO:MO",
       description:
           "A traditional favorite, featuring minced buffalo meat mixed with fresh herbs and spices, encased in a delicate dough and steamed to perfection.",
-      imagePath: "lib/images/momos/chicken_momo.jpg",
+      imagePath: "lib/images/momos/m1.jpg",
       price: 150.0,
       category: FoodCategory.momo,
       availableAddons: [
@@ -28,7 +28,7 @@ class Restaurant extends ChangeNotifier {
       name: "Chicken MO:MO",
       description:
           " Tender chicken seasoned with a blend of aromatic spices, wrapped in a soft, steamed dough.",
-      imagePath: "lib/images/momos/chicken_momo.jpg",
+      imagePath: "lib/images/momos/m2.jpg",
       price: 180.0,
       category: FoodCategory.momo,
       availableAddons: [
@@ -41,7 +41,7 @@ class Restaurant extends ChangeNotifier {
       name: "Veg MO:MO",
       description:
           "A delightful mix of finely chopped vegetables, including cabbage, carrots, and bell peppers, seasoned with savory spices and encased in a light, steamed wrapper.",
-      imagePath: "lib/images/momos/chicken_momo.jpg",
+      imagePath: "lib/images/momos/m1.jpg",
       price: 130.0,
       category: FoodCategory.momo,
       availableAddons: [
@@ -54,7 +54,7 @@ class Restaurant extends ChangeNotifier {
       name: "Classic MO:MO",
       description:
           "A traditional favorite, featuring minced buffalo meat mixed with fresh herbs and spices, encased in a delicate dough and steamed to perfection.",
-      imagePath: "lib/images/momos/chicken_momo.jpg",
+      imagePath: "lib/images/momos/m2.jpg",
       price: 150.0,
       category: FoodCategory.momo,
       availableAddons: [
@@ -67,7 +67,7 @@ class Restaurant extends ChangeNotifier {
       name: "Tofu MO:MO",
       description:
           "nutritious mix of fresh vegetables and tofu, seasoned with a blend of Asian spices and wrapped in a light dough.",
-      imagePath: "lib/images/momos/chicken_momo.jpg",
+      imagePath: "lib/images/momos/m1.jpg",
       price: 200.0,
       category: FoodCategory.momo,
       availableAddons: [
@@ -82,7 +82,7 @@ class Restaurant extends ChangeNotifier {
       name: "Classic Pizza ",
       description:
           " A classic favorite with a simple yet delightful combination of fresh tomatoes, creamy mozzarella, and aromatic basil leaves. Drizzled with a touch of extra virgin olive oil for a perfect balance of flavors.",
-      imagePath: "lib/images/pizzas/classic_pizza.jpg",
+      imagePath: "lib/images/pizzas/p1.jpg",
       price: 350.0,
       category: FoodCategory.pizzas,
       availableAddons: [
@@ -95,7 +95,7 @@ class Restaurant extends ChangeNotifier {
       name: "Pepperoni Pizza",
       description:
           "Loaded with zesty pepperoni slices and melted mozzarella cheese atop a rich tomato sauce. Each bite offers a savory and slightly spicy kick, making it a timeless favorite.",
-      imagePath: "lib/images/pizzas/pep_pizza.jpg",
+      imagePath: "lib/images/pizzas/p3.jpg",
       price: 380.0,
       category: FoodCategory.pizzas,
       availableAddons: [
@@ -108,7 +108,7 @@ class Restaurant extends ChangeNotifier {
       name: "Veggie Supreme Pizza",
       description:
           " A garden of fresh vegetables, including bell peppers, mushrooms, onions, and black olives, layered over a hearty tomato sauce and topped with melted mozzarella. A colorful and wholesome choice for veggie lovers.",
-      imagePath: "lib/images/pizzas/ves.jpg",
+      imagePath: "lib/images/pizzas/p2.jpg",
       price: 300.0,
       category: FoodCategory.pizzas,
       availableAddons: [
@@ -121,7 +121,7 @@ class Restaurant extends ChangeNotifier {
       name: "BBQ Chicken Pizza",
       description:
           "Smoky barbecue sauce pairs with tender chicken pieces, red onions, and cilantro, all baked to perfection under a layer of gooey mozzarella cheese. A deliciously tangy and savory twist on traditional pizza.",
-      imagePath: "lib/images/pizzas/abs_pizza.jpg",
+      imagePath: "lib/images/pizzas/p4.jpg",
       price: 450.0,
       category: FoodCategory.pizzas,
       availableAddons: [
@@ -134,7 +134,7 @@ class Restaurant extends ChangeNotifier {
       name: "Four Cheese Pizza",
       description:
           "A luxurious blend of four cheeses—mozzarella, cheddar, parmesan, and gorgonzola—melted together on a crisp crust. Rich and indulgent, it's a cheese lover's dream come true.",
-      imagePath: "lib/images/pizzas/pep_pizza.jpg",
+      imagePath: "lib/images/pizzas/p5.jpg",
       price: 390.0,
       category: FoodCategory.pizzas,
       availableAddons: [
@@ -148,7 +148,7 @@ class Restaurant extends ChangeNotifier {
       name: "Garlic Bread",
       description:
           "Crispy, toasted bread topped with a generous spread of garlic butter and herbs.",
-      imagePath: "lib/images/sides/garlic.jpg",
+      imagePath: "lib/images/sides/s2.jpg",
       price: 80.0,
       category: FoodCategory.sides,
       availableAddons: [
@@ -159,7 +159,7 @@ class Restaurant extends ChangeNotifier {
       name: "Mozzarella Sticks",
       description:
           "Golden-fried sticks of gooey mozzarella cheese, served with a side of marinara sauce for dipping.",
-      imagePath: "lib/images/sides/mozza.jpg",
+      imagePath: "lib/images/sides/s3.jpg",
       price: 80.0,
       category: FoodCategory.sides,
       availableAddons: [
@@ -170,7 +170,7 @@ class Restaurant extends ChangeNotifier {
       name: "Caesar Salad",
       description:
           "Crisp romaine lettuce tossed with creamy Caesar dressing, crunchy croutons, and freshly grated parmesan cheese. ",
-      imagePath: "lib/images/sides/caeser.jpg",
+      imagePath: "lib/images/sides/s1.jpg",
       price: 150.0,
       category: FoodCategory.sides,
       availableAddons: [
@@ -182,7 +182,7 @@ class Restaurant extends ChangeNotifier {
       name: "Loaded Nachos",
       description:
           "risp tortilla chips piled high with melted cheese, jalapeños, and savory toppings. ",
-      imagePath: "lib/images/sides/nachos.jpg",
+      imagePath: "lib/images/sides/s4.jpg",
       price: 390.0,
       category: FoodCategory.sides,
       availableAddons: [
@@ -195,7 +195,7 @@ class Restaurant extends ChangeNotifier {
       name: "ice-cream",
       description:
           " A classic favorite with a simple yet delightful combination of fresh tomatoes, creamy mozzarella, and aromatic basil leaves. Drizzled with a touch of extra virgin olive oil for a perfect balance of flavors.",
-      imagePath: "lib/images/desserts/cake.jpg",
+      imagePath: "lib/images/desserts/d1.jpg",
       price: 350.0,
       category: FoodCategory.desserts,
       availableAddons: [
@@ -208,7 +208,7 @@ class Restaurant extends ChangeNotifier {
       name: "Tiramisu",
       description:
           " A classic favorite with a simple yet delightful combination of fresh tomatoes, creamy mozzarella, and aromatic basil leaves. Drizzled with a touch of extra virgin olive oil for a perfect balance of flavors.",
-      imagePath: "lib/images/desserts/tiar.jpg",
+      imagePath: "lib/images/desserts/d1.jpg",
       price: 350.0,
       category: FoodCategory.desserts,
       availableAddons: [
@@ -221,7 +221,7 @@ class Restaurant extends ChangeNotifier {
       name: "Cake",
       description:
           " A classic favorite with a simple yet delightful combination of fresh tomatoes, creamy mozzarella, and aromatic basil leaves. Drizzled with a touch of extra virgin olive oil for a perfect balance of flavors.",
-      imagePath: "lib/images/desserts/cake.jpg",
+      imagePath: "lib/images/desserts/d1.jpg",
       price: 350.0,
       category: FoodCategory.desserts,
       availableAddons: [
@@ -234,7 +234,7 @@ class Restaurant extends ChangeNotifier {
       name: "pastry ",
       description:
           " A classic favorite with a simple yet delightful combination of fresh tomatoes, creamy mozzarella, and aromatic basil leaves. Drizzled with a touch of extra virgin olive oil for a perfect balance of flavors.",
-      imagePath: "lib/images/desserts/tiar.jpg",
+      imagePath: "lib/images/desserts/d1.jpg",
       price: 350.0,
       category: FoodCategory.desserts,
       availableAddons: [
@@ -248,7 +248,7 @@ class Restaurant extends ChangeNotifier {
       name: "Mojito",
       description:
           " A classic favorite with a simple yet delightful combination of fresh tomatoes, creamy mozzarella, and aromatic basil leaves. Drizzled with a touch of extra virgin olive oil for a perfect balance of flavors.",
-      imagePath: "lib/images/drinks/moji.jpg",
+      imagePath: "lib/images/drinks/moj.jpg",
       price: 350.0,
       category: FoodCategory.drinks,
       availableAddons: [
@@ -274,7 +274,7 @@ class Restaurant extends ChangeNotifier {
       name: "Whiskey ",
       description:
           " A classic favorite with a simple yet delightful combination of fresh tomatoes, creamy mozzarella, and aromatic basil leaves. Drizzled with a touch of extra virgin olive oil for a perfect balance of flavors.",
-      imagePath: "lib/images/drinks/whis.jpg",
+      imagePath: "lib/images/drinks/whi.jpg",
       price: 350.0,
       category: FoodCategory.drinks,
       availableAddons: [
@@ -289,7 +289,7 @@ class Restaurant extends ChangeNotifier {
   final List<CartItem> _cart = [];
 
   //delivery address
-  String _deliveryAddress= 'Imadol,pokhari';
+  String _deliveryAddress = 'Imadol,pokhari';
   /*
 
   G E TT E R s
@@ -301,7 +301,6 @@ class Restaurant extends ChangeNotifier {
   OPERATIONNS
 
   */
- 
 
   //add to cart
   void addToCart(Food food, List<Addon> selectedAddons) {
@@ -378,12 +377,12 @@ class Restaurant extends ChangeNotifier {
     notifyListeners();
   }
 
-
   //update delivery address
-  void updateDeliveryAddress(String newAddress){
+  void updateDeliveryAddress(String newAddress) {
     _deliveryAddress = newAddress;
     notifyListeners();
   }
+
   /*
 
   H E L P E R S
