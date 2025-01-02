@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: AuthGate(),
+      home: SplashScreen(),
       theme: Provider.of<ThemeProvider>(context).themeData,
     );
   }
