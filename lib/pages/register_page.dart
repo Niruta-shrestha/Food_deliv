@@ -1,8 +1,10 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_app/components/my_button.dart';
 import 'package:flutter_app/components/my_textfield.dart';
 import 'package:flutter_app/services/auth/auth-service.dart';
-
+import 'package:flutter_app/models/user_model.dart'; // Import the UserModel
 
 class RegisterPage extends StatefulWidget {
   final void Function()? onTap;
@@ -14,41 +16,62 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  //text editing controllers
+  // Text editing controllers
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  final confirmPasswordController =TextEditingController();
+  final confirmPasswordController = TextEditingController();
+  final usernameController = TextEditingController();
+  final numberController = TextEditingController();
 
-  // register method
+  // Register method
   void register() async {
-    //get auth services
+    // Get auth services
     final authService = AuthService();
 
-    //check if password match -> create user
-    if (passwordController.text == confirmPasswordController.text){
-      //try creating user
-      try{
-        await authService.signUpWithEmailPassword(emailController.text,passwordController.text,);
-      }
+    // Check if password match -> create user
+    if (passwordController.text == confirmPasswordController.text) {
+      // Try creating user
+      try {
+        // Sign up user with email and password
+        await authService.signUpWithEmailPassword(
+          emailController.text,
+          passwordController.text,
+        );
 
-      //display any error
-      catch(e){
+        // After successful registration, save the user data to Firestore
+        UserModel user = UserModel(
+          email: emailController.text,
+          userName: usernameController.text,
+          number: numberController.text,
+
+        );
+
+        // Save user data to Firestore
+        final userService = UserService();
+        await userService.saveUser(user);
+        print("Data saved Sucessfully");
         showDialog(
-          // ignore: use_build_context_synchronously
+          context: context,
+          builder: (context) => const AlertDialog(
+            title: Text("Registration Successful!"),
+          ),
+        );
+      } catch (e) {
+        // Display any errors during sign-up
+        showDialog(
           context: context,
           builder: (context) => AlertDialog(
             title: Text(e.toString()),
-          )
+          ),
         );
       }
-    }
-    //if password dont match-> show error
-    else{
-       showDialog(
-          context: context,
-          builder: (context) => const AlertDialog(
-            title: Text("Passwords dont match!"),
-          )
+    } else {
+      // If passwords don't match -> show error
+      showDialog(
+        context: context,
+        builder: (context) => const AlertDialog(
+          title: Text("Passwords don't match!"),
+        ),
       );
     }
   }
@@ -56,12 +79,12 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.surface,
-        body: Center(
-            child: Column(
+      backgroundColor: Theme.of(context).colorScheme.surface,
+      body: Center(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            //logo
+            // Logo
             Icon(
               Icons.lock_open_rounded,
               size: 100,
@@ -70,9 +93,9 @@ class _RegisterPageState extends State<RegisterPage> {
 
             const SizedBox(height: 25),
 
-            //slogan
+            // Slogan
             Text(
-              "Lets create an account",
+              "Let's create an account",
               style: TextStyle(
                 fontSize: 16,
                 color: Theme.of(context).colorScheme.inversePrimary,
@@ -80,23 +103,37 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
             const SizedBox(height: 25),
 
-            //email
+            // Email
             MyTextField(
-              controller:  emailController,
+              controller: emailController,
               hintText: "Email",
               obscureText: false,
             ),
 
             const SizedBox(height: 10),
-            //password TextField
+            MyTextField(
+              controller: usernameController,
+              hintText: "UserName",
+              obscureText: false,
+            ),
+
+            const SizedBox(height: 10),
+            MyTextField(
+              controller: numberController,
+              hintText: "Contact Number",
+              obscureText: false,
+            ),
+
+            const SizedBox(height: 10),
+            // Password TextField
             MyTextField(
               controller: passwordController,
               hintText: "Password",
               obscureText: true,
             ),
-            const SizedBox(height: 25),
+            const SizedBox(height: 10),
 
-            //confirm password TextField
+            // Confirm password TextField
             MyTextField(
               controller: confirmPasswordController,
               hintText: "Confirm Password",
@@ -104,18 +141,18 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
             const SizedBox(height: 25),
 
-            //sign in MyButton
+            // Sign up MyButton
             MyButton(
-              text: "sign Up",
+              text: "Sign Up",
               onTap: register,
             ),
             const SizedBox(height: 25),
-            //already have an account? log in here!
+            // Already have an account? Log in here!
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Already have an account",
+                  "Already have an account?",
                   style: TextStyle(
                       color: Theme.of(context).colorScheme.inversePrimary),
                 ),
@@ -131,7 +168,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),
