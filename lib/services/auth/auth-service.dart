@@ -44,5 +44,7 @@ class AuthService{
     return await _firebaseAuth.signOut();
   }
 
+  signInWithUsernamePassword(String text, String text2) {}
+
 
 }
