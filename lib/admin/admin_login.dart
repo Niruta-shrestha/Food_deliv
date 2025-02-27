@@ -8,6 +8,8 @@ import 'package:flutter_app/components/my_button.dart';
 import 'package:flutter_app/components/my_textfield.dart';
 import 'package:flutter_app/services/auth/auth-service.dart';
 
+import '../pages/home_page.dart';
+
 class AdminLogin extends StatefulWidget {
   const AdminLogin({super.key});
 
@@ -16,22 +18,34 @@ class AdminLogin extends StatefulWidget {
 }
 
 class _AdminLoginState extends State<AdminLogin> {
-  TextEditingController usernameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
- void login() async {
+
+  void login() async {
     // Get instance of auth service
     final authService = AuthService();
 
     // Try sign in
     try {
-      await authService.signInWithUsernamePassword(
-          usernameController.text, passwordController.text,);
+      await authService.signInWithEmailPassword(
+        emailController.text.trim(),
+        passwordController.text.trim(),
+      );
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => HomePage()),
+        (route) => false, // This removes all previous routes from the stack
+      );
+
+      print('sucess');
       // You might want to navigate to another page on successful login
     } catch (e) {
-      // Display error
+      print('fail');
+      print('fail');
+
       showDialog(
-       // ignore: use_build_context_synchronously
-        context: context ,
+        // ignore: use_build_context_synchronously
+        context: context,
         builder: (context) => AlertDialog(
           title: Text(e.toString()),
         ),
@@ -39,10 +53,9 @@ class _AdminLoginState extends State<AdminLogin> {
     }
   }
 
-  
-
   @override
   Widget build(BuildContext context) {
+    final Size size=MediaQuery.of(context).size;
     return Scaffold(
         backgroundColor: Theme.of(context).colorScheme.surface,
         body: SafeArea(
@@ -51,12 +64,15 @@ class _AdminLoginState extends State<AdminLogin> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const SizedBox(height: 200, width: 200),
                   // Logo
-                  Image.asset(
-                    'bike.gif',
-                    fit: BoxFit.values[1],
-                    height: 200,
+                  Container(
+                    height: size.height*0.4,
+                    width: size.width,
+                    child: Image.asset(
+                      'bike.gif',
+                      fit: BoxFit.values[1],
+                      height: 200,
+                    ),
                   ),
                   const SizedBox(height: 50),
                   // Slogan
@@ -70,7 +86,7 @@ class _AdminLoginState extends State<AdminLogin> {
                   const SizedBox(height: 25),
                   // Email
                   MyTextField(
-                    controller: usernameController,
+                    controller: emailController,
                     hintText: "Admin",
                     obscureText: false,
                   ),
@@ -84,7 +100,10 @@ class _AdminLoginState extends State<AdminLogin> {
                   const SizedBox(height: 25),
                   // Sign in MyButton
                   MyButton(
-                    onTap: login,
+                    onTap: () {
+                      print('button tapped');
+                      login();
+                    },
                     text: "Log In",
                   ),
                 ],
@@ -97,7 +116,7 @@ class _AdminLoginState extends State<AdminLogin> {
   loginAdmin() {
     FirebaseFirestore.instance.collection("Admin").get().then((snapshot) {
       snapshot.docs.forEach((result) {
-        if (result.data()["username"] != usernameController.text.trim()) {
+        if (result.data()["username"] != emailController.text.trim()) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               backgroundColor: Colors.red,
               content:

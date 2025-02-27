@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/admin/admin_login.dart';
 import 'package:flutter_app/components/my_button.dart';
 import 'package:flutter_app/services/auth/auth-service.dart';
 import '../components/my_textfield.dart';
@@ -14,7 +15,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   // Text editing controllers
-  final  emailController = TextEditingController();
+  final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
   // Login method
@@ -25,13 +26,15 @@ class _LoginPageState extends State<LoginPage> {
     // Try sign in
     try {
       await authService.signInWithEmailPassword(
-          emailController.text, passwordController.text,);
+        emailController.text,
+        passwordController.text,
+      );
       // You might want to navigate to another page on successful login
     } catch (e) {
       // Display error
       showDialog(
-       // ignore: use_build_context_synchronously
-        context: context ,
+        // ignore: use_build_context_synchronously
+        context: context,
         builder: (context) => AlertDialog(
           title: Text(e.toString()),
         ),
@@ -130,6 +133,22 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                     ),
+                    TextButton(
+                        onPressed: () {
+                           Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => AdminLogin(),
+                            ),
+                          );
+                        },
+                        child: Text(
+                          "Or login as Admin",
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.inversePrimary,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ))
                   ],
                 ),
               ],

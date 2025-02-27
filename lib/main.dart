@@ -1,8 +1,12 @@
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/admin/admin_login.dart';
+import 'package:flutter_app/admin/home_admin.dart';
 import 'package:flutter_app/firebase_options.dart';
 import 'package:flutter_app/models/restaurant.dart';
+import 'package:flutter_app/pages/profile_screen.dart';
+import 'package:flutter_app/pages/register_page.dart';
 
 
 import 'package:flutter_app/splash.dart';

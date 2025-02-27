@@ -3,6 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/admin/home_admin.dart';
 import '../models/user_model.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -24,16 +25,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
     if (email.isNotEmpty) {
       user = getUserByEmail(email);
     } else {
-      user = Future.value(null);  // Handle case when no user is logged in
+      user = Future.value(null); // Handle case when no user is logged in
     }
   }
 
   Future<UserModel?> getUserByEmail(String email) async {
     try {
-      DocumentSnapshot docSnapshot = await FirebaseFirestore.instance
-          .collection('users')
-          .doc(email)
-          .get();
+      DocumentSnapshot docSnapshot =
+          await FirebaseFirestore.instance.collection('users').doc(email).get();
 
       if (docSnapshot.exists) {
         return UserModel.fromMap(docSnapshot.data() as Map<String, dynamic>);
@@ -77,12 +76,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     radius: 80,
                     child: CircleAvatar(
                       radius: 75,
-                      backgroundColor: Colors.grey[200],
-                      child: Icon(
-                        Icons.person,
-                        size: 100,
-                        color: Colors.grey[800],
-                      ),
+                      backgroundImage: NetworkImage(
+                          'https://images.unsplash.com/photo-1628563694622-5a76957fd09c?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW5zdGFncmFtJTIwcHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D'),
                     ),
                   ),
                   const SizedBox(height: 20),
@@ -110,6 +105,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     title: 'Contact Number',
                     subtitle: userData.number.toString(),
                   ),
+                  if (userData.email == "nirutas@gmail.com")
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AdminHome(),
+                          ),
+                        );
+                      },
+                      child: buildProfileTile(
+                        context,
+                        icon: Icons.dashboard,
+                        title: 'Admin Dashboard',
+                        subtitle: "Dashboard",
+                      ),
+                    ),
                 ],
               );
             }
@@ -120,7 +132,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   // Helper method to create the profile list items
-  Widget buildProfileTile(BuildContext context, {
+  Widget buildProfileTile(
+    BuildContext context, {
     required IconData icon,
     required String title,
     required String subtitle,
@@ -133,7 +146,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
           borderRadius: BorderRadius.circular(10),
         ),
         child: ListTile(
-          contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           leading: Icon(
             icon,
             color: Theme.of(context).primaryColor,
